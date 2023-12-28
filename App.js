@@ -1,8 +1,17 @@
-import React from 'react';
-import {View, Text, StyleSheet, FlatList, Image} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import Header from './Header';
 
 const App = () => {
+  const [favBars, setFavBars] = useState([]);
+
   const bars = [
     {
       id: 1,
@@ -41,16 +50,27 @@ const App = () => {
     },
   ];
 
+  const AddBarToFavorites = bar => {
+    setFavBars(prevFavorites => [...prevFavorites, bar]);
+  };
+
   const renderItem = ({item}) => (
     <View style={styles.card}>
       <Image source={{uri: item.image_url}} style={styles.cardImage} />
       <View style={styles.cardContent}>
         <Text style={styles.cardTitle}>{item.name}</Text>
         <Text style={styles.cardSpecials}>{item.specials}</Text>
+        <TouchableOpacity
+          style={styles.favButton}
+          onPress={() => AddBarToFavorites(item)}>
+          <Text style={styles.favButtonText}>+</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 
+  // prints to console to check that the bar is added to favorites list
+  // useEffect[console.log(favBars)];
   return (
     <View style={styles.container}>
       <Header />
@@ -92,6 +112,18 @@ const styles = StyleSheet.create({
   },
   cardSpecials: {
     fontSize: 16,
+  },
+  favButton: {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    backgroundColor: 'blue',
+    padding: 8,
+    borderRadius: 5,
+  },
+  favButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 
