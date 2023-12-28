@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import Header from './Header';
 
@@ -25,7 +26,7 @@ const App = () => {
       name: 'The One with the Plants',
       image_url:
         'https://images.unsplash.com/photo-1622758235004-51977c5863f5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cm9vZnRvcCUyMGJhcnxlbnwwfHwwfHx8MA%3D%3D',
-      specials: '$7 Mojitos',
+      specials: '$7 Mojito',
     },
     {
       id: 3,
@@ -39,7 +40,7 @@ const App = () => {
       name: 'The Speakeasy',
       image_url:
         'https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YmFyfGVufDB8fDB8fHww',
-      specials: '$10 Negronis',
+      specials: '$10 Negroni',
     },
     {
       id: 5,
@@ -52,6 +53,7 @@ const App = () => {
 
   const AddBarToFavorites = bar => {
     setFavBars(prevFavorites => [...prevFavorites, bar]);
+    Alert.alert('Bar added to favorites');
   };
 
   const renderItem = ({item}) => (
